@@ -1,0 +1,18 @@
+name: CustomPortals
+version: 1.1.1
+author: jacob5257
+main: com.jacob5257.CustomPortals.CustomPortals
+api-version: 1.20
+
+permissions:
+   customportals.create:
+      description: Allows you to create portals to custom worlds.
+      default: true
+   customportals.manage:
+      description: Allows you to reset all portals.
+      default: op
+
+commands:
+   portals:
+      description: Shows the help menu.
+      usage: /<command>
