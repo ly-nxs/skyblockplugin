@@ -30,6 +30,6 @@ public class Cooldown {
 
     // time has to be in seconds
     public static void addToCooldown(String playerName, long time) {
-        cooldowns.put(playerName, System.currentTimeMillis() + (24 * 60 * 60 * time));
+        cooldowns.put(playerName, System.currentTimeMillis() + (1000 * time));
     }
 }
