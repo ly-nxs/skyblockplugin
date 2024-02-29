@@ -1,17 +1,13 @@
 package com.lynx.skyblocktp.commands;
 
-import com.lynx.skyblocktp.skyblock;
+import com.lynx.skyblocktp.config;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import static com.lynx.skyblocktp.Cooldown.inCooldown;
 import static com.lynx.skyblocktp.skyblock.*;
 
 public class tpcommand implements CommandExecutor {
@@ -56,7 +52,7 @@ public class tpcommand implements CommandExecutor {
                x -= 128;
                z -= 128;
            }
-           skyblock.usedPlayer(player);
+           config.usedPlayer(player);
        }
        return true;
     }
