@@ -25,23 +25,78 @@ import java.io.*;
 import java.util.*;
 
 public class skyblock extends JavaPlugin {
-    public static int x = 256;
+    public static int x = 0;
     public static int y = 0;
     public  static int z = 0;
-    Location loc = new Location(world,x,y,z);
+    public static Material[][][] structure = {
+            {{Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
+            {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
+                {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK}},
+            {{Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
+            {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
+                {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK}},
+            {{Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
+            {Material.GRASS_BLOCK,Material.BEDROCK,Material.GRASS_BLOCK},
+                {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK}},
+            {{Material.AIR,Material.CHEST,Material.AIR},
+            {Material.AIR,Material.AIR,Material.AIR},
+            {Material.AIR,Material.OAK_SAPLING,Material.AIR}}
+    };
+
+
 
 
     @Override
     public void onEnable(){
+
      getServer().getConsoleSender().sendMessage("SkyblockTP v1.0");
      getCommand("skyblock").setExecutor(new tpcommand());
-
+    loadUsedLocation();
     }
 
 
 
     @Override
     public void onDisable(){
+        saveUsedLocation(x,y,z);
 
     }
+    public static void loadUsedLocation() {
+        try {
+            FileReader reader = new FileReader("saveloc.txt");
+            BufferedReader br = new BufferedReader(reader);
+
+            String line1 = br.readLine();
+            x = Integer.parseInt(line1);
+
+            String line2 = br.readLine();
+            y = Integer.parseInt(line2);
+
+            String line3 = br.readLine();
+            z = Integer.parseInt(line3);
+
+            br.close();
+            reader.close();
+
+            // Replace "null" with the appropriate world
+        } catch (IOException e) {
+            // Handle potential exceptions like file not found or invalid data
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            // Handle invalid data format in the file
+            e.printStackTrace();
+        }
+    }
+
+    public void saveUsedLocation(int x, int y, int z) {
+        try {
+            FileWriter writer = new FileWriter("saveloc.txt", true);
+            writer.write(x + "\n" + y + "\n" + z + "\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
