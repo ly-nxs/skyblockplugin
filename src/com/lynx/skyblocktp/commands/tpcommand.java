@@ -19,8 +19,8 @@ public class tpcommand implements CommandExecutor {
        if (s.equalsIgnoreCase("skyblock")) {
            Player player = (Player) sender;
            Location location = new Location(player.getWorld(), x, y, z);
+           loadChunk(location);
            sender.sendMessage("Creating new island");
-
            for (int j = z; j < structure.length; j++) {
                for (int k = y; k < structure[j].length; k++) {
                    for (int l = x; l < structure[j][l].length; l++) {
@@ -45,5 +45,11 @@ public class tpcommand implements CommandExecutor {
            skyblock.usedPlayer(player);
        }
        return true;
+    }
+
+    public static void loadChunk(Location location) {
+        if (!location.getChunk().isLoaded()) {
+            location.getChunk().load();
+        }
     }
 }
