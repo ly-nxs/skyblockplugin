@@ -2,23 +2,8 @@ package com.lynx.skyblocktp;
 
 import com.lynx.skyblocktp.commands.tpcommand;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -27,7 +12,8 @@ import java.util.*;
 public class skyblock extends JavaPlugin {
     public static int x = 0;
     public static int y = 0;
-    public  static int z = 0;
+    public static int z = 0;
+    private static List<Player> usedPlayers = new ArrayList<>();
     public static Material[][][] structure = {
             {{Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
             {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
@@ -49,17 +35,66 @@ public class skyblock extends JavaPlugin {
     @Override
     public void onEnable(){
 
-     getServer().getConsoleSender().sendMessage("SkyblockTP v1.0");
-     getCommand("skyblock").setExecutor(new tpcommand());
-    loadUsedLocation();
+        getServer().getConsoleSender().sendMessage("SkyblockTP v1.0");
+        getCommand("skyblock").setExecutor(new tpcommand());
+        loadUsedLocation();
+        // check for saveloc.txt and usedplayers.txt, creating them if they don't exist
+        File file = new File("saveloc.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        File file2 = new File("usedplayers.txt");
+        if (!file2.exists()) {
+            try {
+                file2.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        loadUsedPlayers();
     }
 
+    // loads all players who have used the command from the text file to the arraylist
+    private void loadUsedPlayers() {
+        try {
+            FileReader reader = new FileReader("usedplayers.txt");
+            BufferedReader br = new BufferedReader(reader);
 
+            String line;
+            while ((line = br.readLine()) != null) {
+                usedPlayers.add(Bukkit.getPlayer(line));
+            }
+
+            br.close();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // saves all players who have used the command to the text file
+    public void saveUsedPlayers() {
+        try {
+            FileWriter writer = new FileWriter("usedplayers.txt", false);
+            StringBuilder toWrite = new StringBuilder();
+            for (Player player : usedPlayers) {
+                toWrite.append(player.getName()).append("\n");
+            }
+            writer.write(toWrite.toString());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onDisable(){
         saveUsedLocation(x,y,z);
-
+        saveUsedPlayers();
     }
     public static void loadUsedLocation() {
         try {
@@ -98,5 +133,9 @@ public class skyblock extends JavaPlugin {
         }
     }
 
+    // add a player to the usedPlayers arraylist to indicate they have used the cmd before
+    public static void usedPlayer(Player player) {
+        usedPlayers.add(player);
+    }
 
 }

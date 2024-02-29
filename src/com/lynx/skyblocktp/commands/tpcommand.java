@@ -16,9 +16,9 @@ import static com.lynx.skyblocktp.skyblock.*;
 public class tpcommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args){
-       if(s.equalsIgnoreCase("skyblock")) {
+       if (s.equalsIgnoreCase("skyblock")) {
            Player player = (Player) sender;
-           Location location = new Location(player.getWorld(),x,y,z);
+           Location location = new Location(player.getWorld(), x, y, z);
            sender.sendMessage("Creating new island");
 
            for (int j = z; j < structure.length; j++) {
@@ -37,13 +37,12 @@ public class tpcommand implements CommandExecutor {
            player.teleport(location);
            sender.sendMessage("Teleported!");
            player.setRespawnLocation(location);
-           player.getInventory().addItem(new ItemStack(Material.LAVA_BUCKET,1));
+           player.getInventory().addItem(new ItemStack(Material.LAVA_BUCKET, 1));
            player.getInventory().addItem(new ItemStack(Material.ICE, 1));
-            x += 64;
-            z -= 64;
-
-           }
-
+           x += 64;
+           z -= 64;
+           skyblock.usedPlayer(player);
+       }
        return true;
     }
 }
