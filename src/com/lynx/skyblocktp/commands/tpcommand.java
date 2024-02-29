@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import static com.lynx.skyblocktp.Cooldown.inCooldown;
 import static com.lynx.skyblocktp.skyblock.*;
 
 public class tpcommand implements CommandExecutor {
@@ -18,6 +19,10 @@ public class tpcommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args){
        if (s.equalsIgnoreCase("skyblock")) {
            Player player = (Player) sender;
+           if (usedPlayers.contains(player)) {
+               sender.sendMessage("You have already used this command.");
+               return true;
+           }
            Location location = new Location(player.getWorld(), x, y, z);
            loadChunk(location);
            sender.sendMessage("Creating new island");

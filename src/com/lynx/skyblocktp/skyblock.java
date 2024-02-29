@@ -13,7 +13,7 @@ public class skyblock extends JavaPlugin {
     public static int x = 0;
     public static int y = 0;
     public static int z = 0;
-    private static List<Player> usedPlayers = new ArrayList<>();
+    public static List<Player> usedPlayers = new ArrayList<>();
     public static Material[][][] structure = {
             {{Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
             {Material.GRASS_BLOCK,Material.GRASS_BLOCK,Material.GRASS_BLOCK},
