@@ -11,7 +11,7 @@ import java.util.*;
 
 public class skyblock extends JavaPlugin {
     public static int x = 0;
-    public static int y = 0;
+    public static int y = 64;
     public static int z = 0;
     public static List<Player> usedPlayers = new ArrayList<>();
     public static Material[][][] structure = {
@@ -35,7 +35,7 @@ public class skyblock extends JavaPlugin {
     @Override
     public void onEnable(){
 
-        getServer().getConsoleSender().sendMessage("SkyblockTP v1.0");
+        getServer().getConsoleSender().sendMessage("SkyblockTP Enabled");
         getCommand("skyblock").setExecutor(new tpcommand());
         loadUsedLocation();
         // check for saveloc.txt and usedplayers.txt, creating them if they don't exist
@@ -43,6 +43,9 @@ public class skyblock extends JavaPlugin {
         if (!file.exists()) {
             try {
                 file.createNewFile();
+                FileWriter writer = new FileWriter("saveloc.txt", true);
+                writer.write(x + "\n" + y + "\n" + z + "\n");
+                writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -45,8 +45,17 @@ public class tpcommand implements CommandExecutor {
            player.setRespawnLocation(respawnLocation);
            player.getInventory().addItem(new ItemStack(Material.LAVA_BUCKET, 1));
            player.getInventory().addItem(new ItemStack(Material.ICE, 1));
-           x += 64;
-           z -= 64;
+           int h  = (int)(Math.random()*3)+1;
+           if(h == 3){
+            x += 128;
+            z += 128;
+           } else if (h == 2) {
+               x += 128;
+               z -= 128;
+           } else{
+               x -= 128;
+               z -= 128;
+           }
            skyblock.usedPlayer(player);
        }
        return true;
