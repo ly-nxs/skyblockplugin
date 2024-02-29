@@ -49,8 +49,8 @@ public class tpcommand implements CommandExecutor {
                x += 128;
                z -= 128;
            } else{
-               x -= 128;
-               z -= 128;
+               x -= 64;
+               z -= 64;
            }
            config.usedPlayer(player);
        }
