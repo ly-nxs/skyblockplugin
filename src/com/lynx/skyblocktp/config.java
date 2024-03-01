@@ -1,6 +1,5 @@
 package com.lynx.skyblocktp;
 
-import static com.lynx.skyblocktp.skyblock.usedPlayers;
 import java.io.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

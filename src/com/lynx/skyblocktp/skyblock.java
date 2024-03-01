@@ -5,8 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
-import com.lynx.skyblocktp.config.*;
-
 import static com.lynx.skyblocktp.config.*;
 
 public class skyblock extends JavaPlugin {
@@ -31,7 +29,7 @@ public class skyblock extends JavaPlugin {
     @Override
     public void onEnable(){
         getServer().getConsoleSender().sendMessage("SkyblockTP Enabled");
-        getCommand("skyblock").setExecutor(new tpcommand());
+        Objects.requireNonNull(getCommand("skyblock")).setExecutor(new tpcommand());
         createFile();
         loadUsedLocation();
         loadUsedPlayers();
