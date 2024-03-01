@@ -82,11 +82,6 @@ public class config {
             br.close();
             reader.close();
 
-            skyblock.x = x;
-            skyblock.y = y;
-            skyblock.z = z;
-
-
             // Replace "null" with the appropriate world
         } catch (IOException e) {
             // Handle potential exceptions like file not found or invalid data
@@ -98,9 +93,9 @@ public class config {
     }
 
     public static void saveUsedLocation(int x, int y, int z) {
-         x = skyblock.x;
-         y = skyblock.y;
-         z = skyblock.z;
+         skyblock.x = x;
+         skyblock.y = y;
+         skyblock.z = z;
 
 
         try {
