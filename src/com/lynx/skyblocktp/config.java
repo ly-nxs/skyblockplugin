@@ -3,6 +3,7 @@ package com.lynx.skyblocktp;
 import static com.lynx.skyblocktp.skyblock.usedPlayers;
 import java.io.*;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import static com.lynx.skyblocktp.skyblock.*;
 
@@ -59,7 +60,11 @@ public class config {
             e.printStackTrace();
         }
     }
-
+    public static void loadChunk(Location location) {
+        if (!location.getChunk().isLoaded()) {
+            location.getChunk().load();
+        }
+    }
     public static void loadUsedLocation() {
         try {
             FileReader reader = new FileReader("saveloc.txt");

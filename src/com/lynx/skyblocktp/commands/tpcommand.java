@@ -8,6 +8,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import static com.lynx.skyblocktp.config.loadChunk;
 import static com.lynx.skyblocktp.skyblock.*;
 
 public class tpcommand implements CommandExecutor {
@@ -22,23 +24,25 @@ public class tpcommand implements CommandExecutor {
            Location location = new Location(player.getWorld(), x, y, z);
            loadChunk(location);
            sender.sendMessage("Creating new island");
-           for (int j = z; j < structure.length; j++) {
-               for (int k = y; k < structure[j].length; k++) {
-                   for (int l = x; l < structure[j][l].length; l++) {
-                       int xPos = location.getBlockX() + l - structure[j][k].length / 2;
-                       int yPos = location.getBlockY() + k;
-                       int zPos = location.getBlockZ() + j - structure[j].length / 2;
+           for(int i = 0; i < 3; i++){
+               for(int j = 0; j < 3; j++) {
+                int xPos = x + i;
+                int zPos = z + j;
 
-                       Location blockLocation = new Location(player.getWorld(), xPos, yPos, zPos);
-                       blockLocation.getBlock().setType(structure[j][k][l]);
-                   }
+                   Location grassLocation = new Location(player.getWorld(), xPos, y-3, zPos);
+                   grassLocation.getBlock().setType(grass[i][j]);
+                   Location grassLocation2 = new Location(player.getWorld(), xPos, y-2, zPos);
+                   grassLocation2.getBlock().setType(grass[i][j]);
+                   Location strLoc = new Location(player.getWorld(),xPos,y-1,zPos);
+                   strLoc.getBlock().setType(str[i][j]);
+
                }
            }
+           loadChunk(location);
            sender.sendMessage("Island is finished...  teleporting");
            player.teleport(location);
            sender.sendMessage("Teleported!");
-           Location respawnLocation = new Location(player.getWorld(), x, y + 2, z);
-           player.setRespawnLocation(respawnLocation);
+           player.setRespawnLocation(location);
            player.getInventory().addItem(new ItemStack(Material.LAVA_BUCKET, 1));
            player.getInventory().addItem(new ItemStack(Material.ICE, 1));
            int h  = (int)(Math.random()*3)+1;
@@ -57,9 +61,5 @@ public class tpcommand implements CommandExecutor {
        return true;
     }
 
-    public static void loadChunk(Location location) {
-        if (!location.getChunk().isLoaded()) {
-            location.getChunk().load();
-        }
-    }
+
 }
