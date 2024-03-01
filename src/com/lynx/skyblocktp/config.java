@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import static com.lynx.skyblocktp.skyblock.*;
 
 public class config {
-    public static void createFile(){
+    public static void createFile() {
         File file = new File("saveloc.txt");
         if (!file.exists()) {
             try {
