@@ -42,19 +42,24 @@ public class tpcommand implements CommandExecutor {
            sender.sendMessage("Island is finished...  teleporting");
            player.teleport(location);
            sender.sendMessage("Teleported!");
+           Location respawn = new Location(player.getWorld(), x,y+2,z);
            player.setRespawnLocation(location);
            player.getInventory().addItem(new ItemStack(Material.LAVA_BUCKET, 1));
            player.getInventory().addItem(new ItemStack(Material.ICE, 1));
+           player.getInventory().addItem(new ItemStack(Material.BONE_MEAL, 16));
            int h  = (int)(Math.random()*3)+1;
            if(h == 3){
-            x += 128;
-            z += 128;
+            x += 256;
+            z += 256;
+            y = 64;
            } else if (h == 2) {
-               x += 128;
-               z -= 128;
+               x += 256;
+               z -= 256;
+               y = 32;
            } else{
-               x -= 64;
-               z -= 64;
+               x -= 128;
+               z -= 128;
+               y = 128;
            }
            config.usedPlayer(player);
        }
