@@ -23,9 +23,6 @@ public class skyblock extends JavaPlugin {
             {Material.AIR,Material.OAK_SAPLING,Material.AIR}
     };
 
-
-
-
     @Override
     public void onEnable(){
         getServer().getConsoleSender().sendMessage("SkyblockTP Enabled");
@@ -33,14 +30,7 @@ public class skyblock extends JavaPlugin {
         createFile();
         loadUsedLocation();
         loadUsedPlayers();
-        // check for saveloc.txt and usedplayers.txt, creating them if they don't exist
     }
-
-    // loads all players who have used the command from the text file to the arraylist
-
-
-    // saves all players who have used the command to the text file
-
 
     @Override
     public void onDisable(){

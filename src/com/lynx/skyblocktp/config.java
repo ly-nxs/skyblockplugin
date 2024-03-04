@@ -28,7 +28,7 @@ public class config {
             }
         }
     }
-     public static void loadUsedPlayers() {
+    public static void loadUsedPlayers() {
         try {
             FileReader reader = new FileReader("usedplayers.txt");
             BufferedReader br = new BufferedReader(reader);
@@ -80,8 +80,6 @@ public class config {
 
             br.close();
             reader.close();
-
-            // Replace "null" with the appropriate world
         } catch (IOException e) {
             // Handle potential exceptions like file not found or invalid data
             e.printStackTrace();
@@ -92,11 +90,9 @@ public class config {
     }
 
     public static void saveUsedLocation(int x, int y, int z) {
-         skyblock.x = x;
-         skyblock.y = y;
-         skyblock.z = z;
-
-
+        skyblock.x = x;
+        skyblock.y = y;
+        skyblock.z = z;
         try {
             FileWriter writer = new FileWriter("saveloc.txt", true);
             writer.write(x + "\n" + y + "\n" + z + "\n");
