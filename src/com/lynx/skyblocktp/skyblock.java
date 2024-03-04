@@ -24,7 +24,7 @@ public class skyblock extends JavaPlugin {
     };
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         getServer().getConsoleSender().sendMessage("SkyblockTP Enabled");
         Objects.requireNonNull(getCommand("skyblock")).setExecutor(new tpcommand());
         createFile();
@@ -33,7 +33,7 @@ public class skyblock extends JavaPlugin {
     }
 
     @Override
-    public void onDisable(){
+    public void onDisable() {
         saveUsedLocation(x,y,z);
         saveUsedPlayers();
     }

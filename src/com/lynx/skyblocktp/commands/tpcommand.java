@@ -41,7 +41,8 @@ public class tpcommand implements CommandExecutor {
             sender.sendMessage("Island is finished...  teleporting");
             player.teleport(location);
             sender.sendMessage("Teleported!");
-            Location respawn = new Location(player.getWorld(), x,y+2,z);
+            Location respawn = new Location(player.getWorld(), x,y + 2,z);
+            //todo not sure why since its in the docs but this isn't a method
             player.setRespawnLocation(respawn);
             player.getInventory().addItem(new ItemStack(Material.LAVA_BUCKET, 1));
             player.getInventory().addItem(new ItemStack(Material.ICE, 1));
