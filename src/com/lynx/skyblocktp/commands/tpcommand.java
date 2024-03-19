@@ -54,7 +54,7 @@ public class tpcommand implements CommandExecutor {
                 y = 64;
             } else if (h == 2) {
                 x += 256;
-                z -= 256;
+                z -= 64;
                 y = 32;
             } else {
                 x -= 128;
